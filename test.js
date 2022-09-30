@@ -22,19 +22,13 @@ let p = new arnavPromise((resolve, reject) =>{
 });
 let isDivisibleByFour = (val) => {
     return new arnavPromise((resolve, reject) => {
-        try{
-            if(val%4 ==0){
+            if(val%4 ==0){ff
                 resolve("Divisible by 4");
             }
-            else{
-                reject("Not divisible by 4")
-            }
-        }catch(e){
-            throw new Error;
-        }
+            reject("Not divisible by 4");
+            
     })
 }
-
 
 
 p.then((num) => { 
@@ -42,7 +36,7 @@ p.then((num) => {
         isDivisibleByFour(num).then((msg) => {
             console.log(msg);
         })
-        .catch(() => { console.log("not divisible by 4")})        
+        .catch((msg) => { console.log("Catched: "+ msg)})        
     })
     .catch(() => {console.log("number was odd")
     })

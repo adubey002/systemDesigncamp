@@ -62,6 +62,9 @@ class arnavPromise {
                 value.then(this.#cbFcnSuccess.bind(this), this.#cbFcnFail.bind(this))
                 return
             }
+            if(this.#catchCbStorage.length === 0){
+                throw new UncaughtPromiseError(value);
+            }
             if(this.#state === stateMap.PENDING){
                 //console.log("changing promise state to rejected")
                 this.#value = value;
@@ -115,7 +118,22 @@ class arnavPromise {
             throw result;
         })
     }
+    static resolve(cb){
+        return new Promise((resolve) => {
+            resolve(value);
+        })
+    }
+    static resolve(cb){
+        return new Promise((resolve, reject) => {
+            reject(value);
+        })
+    }
 }
-
+class UncaughtPromiseError extends Error {
+    constructor(error){
+        super(error);
+        this.stack = `(in promise) ${error.stack}`;
+    }
+}
 module.exports = arnavPromise
 

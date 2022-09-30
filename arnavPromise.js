@@ -118,12 +118,12 @@ class arnavPromise {
             throw result;
         })
     }
-    static resolve(cb){
+    static resolve(value){
         return new Promise((resolve) => {
             resolve(value);
         })
     }
-    static resolve(cb){
+    static reject(value){
         return new Promise((resolve, reject) => {
             reject(value);
         })

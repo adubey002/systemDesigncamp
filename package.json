@@ -1,0 +1,24 @@
+{
+  "name": "loadbalancer",
+  "version": "1.0.0",
+  "description": "custom loadBalancer",
+  "main": "loadBalancer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adubey002/systemDesigncamp.git"
+  },
+  "author": "adubey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adubey002/systemDesigncamp/issues"
+  },
+  "homepage": "https://github.com/adubey002/systemDesigncamp#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "request": "^2.81.0"
+  }
+}

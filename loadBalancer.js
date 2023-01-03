@@ -53,13 +53,7 @@ const restartServer = async (server) => {
 
 let cur = 0;
 
-// const handler = (req, res) => {
-//   // Pipe the vanilla node HTTP request (a readable stream) into `request`
-//   // to the next server URL. Then, since `res` implements the writable stream
-//   // interface, you can just `pipe()` into `res`.
-//   req.pipe(request({ url: servers[cur] + req.url })).pipe(res);
-//   cur = (cur + 1) % servers.length;
-// };
+
 const timeGatingMiddleware = (req, res, next) => {
     const start = Date.now();
     // The 'finish' event comes from core Node.js, it means Node is done handing
@@ -71,22 +65,20 @@ const timeGatingMiddleware = (req, res, next) => {
   };
 const handler = async (req, res) => {
     // Add an error handler for the proxied request
-    // if(servers[cur].status === 'up'){ 
+    
             const _req = request({ url: servers[cur].link + req.url }).on('error', error => {
                 servers[cur].status = 'down';
                 res.status(500).send(error.message);
                 cur = (cur + 1) % servers.length; 
                 restartServer(cur); 
             });
+            // using pipe operator to directly pipe the _req to res
             req.pipe(_req).pipe(res);
             cur = (cur + 1) % servers.length;
-    // }else{
-    //     res.status(500).send('Server is down');
-    // }
+   
   };
 const server = express().use(timeGatingMiddleware).get('*', handler).post('*', handler);
 
 server.listen(4000, () => {
-    //console.log(`Main server listening at http://localhost:${port}`);
     setInterval(healthChecks, 5000);
 });

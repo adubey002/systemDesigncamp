@@ -1,8 +1,9 @@
 # systemDesigncamp
 INCLUDES:
-* Chained and nested try , catch, finally.
-* exception handling
+* round robin 3 servers
+* error handling with auto restart servers
+* health check APIs
 
 
 TODO: 
-* all(), allSettled() & ...
+* auto-scaling
